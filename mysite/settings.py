@@ -140,7 +140,9 @@ STATICFILES_DIRS = [
 
 # Media Folder settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/'
+# MEDIA_URL = '/'
+
+SITE_ID = 2
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
