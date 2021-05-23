@@ -38,6 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # django contrib site allauth
+    'django.contrib.sites',
+    # req by django allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount', 
+    # req authentif django allauth by: google
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -66,6 +75,15 @@ TEMPLATES = [
             ],
         },
     },
+]
+# req => AUTHENTICATION_BACKENDS by django allauth
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    ...
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
@@ -125,3 +143,20 @@ STATICFILES_DIRS = [
 # Media folder Settings
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# SITE ID
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
